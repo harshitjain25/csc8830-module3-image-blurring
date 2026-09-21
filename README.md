@@ -1,43 +1,56 @@
 # CSC 8830 - Computer Vision
-
 ## Module 3 Assignment
 
 ### Image Blurring Using Spatial and Fourier Domain Filtering
 
-This project demonstrates the Convolution Theorem using image blurring.
+This project demonstrates image blurring using both spatial-domain convolution and Fourier-domain multiplication.
 
-The same blur operation is performed using:
-
-1. Spatial-domain convolution
-2. Fourier-domain multiplication
-
-The outputs are compared visually and numerically.
-
-## Live Web Application
-
-The deployed Streamlit application can be accessed here:
-
-[Open the Streamlit App](https://csc8830-module3-image-blurring-7uxpwmyzhcocvh5fgvnbrs.streamlit.app/)
+The purpose of the assignment is to show that convolution in the spatial domain gives the same result as multiplication in the frequency domain, apart from very small floating-point numerical differences.
 
 ## Convolution Theorem
 
-Convolution in the spatial domain is equivalent to multiplication in the frequency domain:
+The Convolution Theorem states:
 
 ```text
 f(x,y) * h(x,y) = IFFT(F(u,v)H(u,v))
 ```
 
+where:
+
+- `f(x,y)` is the input image
+- `h(x,y)` is the blur filter
+- `*` represents convolution
+- `F(u,v)` is the Fourier transform of the image
+- `H(u,v)` is the Fourier transform of the filter
+- `IFFT` is the inverse Fourier transform
+
 ## Features
 
-- Upload an image
+- Upload a JPG, JPEG, or PNG image
+- Convert the uploaded image to grayscale
 - Select blur kernel size
-- Spatial-domain image filtering
-- Fourier-domain image filtering
-- Difference visualization
+- Apply spatial-domain convolution
+- Apply Fourier-domain multiplication
+- Display both blurred images
+- Display a normalized difference image
+- Show Mean Absolute Error
+- Show Mean Squared Error
+- Show Maximum Difference
+- Display the averaging blur kernel
+
+## Numerical Validation
+
+The spatial-domain and Fourier-domain results are compared using:
+
 - Mean Absolute Error (MAE)
 - Mean Squared Error (MSE)
 - Maximum Difference
-- Display blur kernel
+
+The values are expected to be extremely close to zero.
+
+Small non-zero values are caused by floating-point precision during numerical computation.
+
+The difference image shown in the web application is normalized only for visualization. The actual numerical differences remain extremely small.
 
 ## Technologies Used
 
@@ -66,27 +79,41 @@ csc8830-module3-image-blurring/
 └── results/
 ```
 
-## How to Run
+## Installation
 
-### 1. Create a Virtual Environment
+Clone the repository:
+
+```bash
+git clone https://github.com/harshitjain25/csc8830-module3-image-blurring.git
+```
+
+Enter the project folder:
+
+```bash
+cd csc8830-module3-image-blurring
+```
+
+Create a virtual environment:
 
 ```bash
 python3 -m venv venv
 ```
 
-Activate it:
+Activate the virtual environment:
 
 ```bash
 source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run the Web Application
+## Run the Web Application
+
+Run:
 
 ```bash
 streamlit run app.py
@@ -94,46 +121,33 @@ streamlit run app.py
 
 The application will open in your browser.
 
-## How It Works
+## Recommended requirements.txt
 
-The program applies the same averaging blur filter using two approaches.
-
-### Spatial Domain
-
-The image is directly convolved with the blur kernel:
+For Streamlit Community Cloud deployment, use only the packages required by this project:
 
 ```text
-g(x,y) = f(x,y) * h(x,y)
+streamlit
+numpy
+scipy
+pillow
+opencv-python-headless
 ```
 
-### Fourier Domain
+## GitHub Repository
 
-The image and kernel are transformed into the frequency domain. Their Fourier transforms are multiplied, and the inverse Fourier transform is applied:
+https://github.com/harshitjain25/csc8830-module3-image-blurring
 
-```text
-G(u,v) = F(u,v)H(u,v)
+## Web Application
 
-g(x,y) = IFFT(G(u,v))
-```
+https://csc8830-module3-image-blurring-7uxpwmyzhcocvh5fgvnbrs.streamlit.app/
 
-According to the Convolution Theorem:
+## Conclusion
 
-```text
-f(x,y) * h(x,y) = IFFT(F(u,v)H(u,v))
-```
+The project shows that image blurring using spatial-domain convolution and Fourier-domain multiplication produces approximately identical results.
 
-## Validation
+The very small numerical differences are caused by floating-point precision.
 
-The spatial-domain result and Fourier-domain result are compared using:
-
-- Mean Absolute Error
-- Mean Squared Error
-- Maximum Difference
-- Difference image
-
-The errors should be extremely close to zero. Small non-zero values may occur because of floating-point numerical precision.
-
-This demonstrates that spatial convolution and Fourier-domain multiplication produce equivalent results.
+This experimentally validates the Convolution Theorem.
 
 ## Author
 
