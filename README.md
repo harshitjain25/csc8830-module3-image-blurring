@@ -1,4 +1,5 @@
 # CSC 8830 - Computer Vision
+
 ## Module 3 Assignment
 
 ### Image Blurring Using Spatial and Fourier Domain Filtering
@@ -11,6 +12,12 @@ The same blur operation is performed using:
 2. Fourier-domain multiplication
 
 The outputs are compared visually and numerically.
+
+## Live Web Application
+
+The deployed Streamlit application can be accessed here:
+
+[Open the Streamlit App](https://csc8830-module3-image-blurring-7uxpwmyzhcocvh5fgvnbrs.streamlit.app/)
 
 ## Convolution Theorem
 
